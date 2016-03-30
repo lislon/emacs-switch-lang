@@ -16,6 +16,9 @@ by `ctrl+shift` or `alt+shift` keybindings in linux.
  * Add keybinding into your *~/.emacs* file:
 ``` emacs-lisp
  (global-set-key (kbd "<f13>") 'toggle-input-method)
+ (add-hook 'minibuffer-setup-hook
+            (lambda ()
+              (local-set-key (kbd "<f13>") 'toggle-input-method)))
 ```
 
 ### Usage

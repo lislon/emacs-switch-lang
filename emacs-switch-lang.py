@@ -6,6 +6,9 @@
 
 # Put in your ~/.emacs config:
 #  (global-set-key (kbd "<f13>") 'toggle-input-method)
+# (add-hook 'minibuffer-setup-hook
+#            (lambda ()
+#              (local-set-key (kbd "<f13>") 'toggle-input-method)))
 
 import re
 import os.path as path
@@ -114,19 +117,19 @@ try:
             try:
                 if detailmatch.group(1) in first_keys:
                     if keystate == "13":  # press
-                        debug("Ctrl pressed")
+                        debug("Shift pressed")
                         first_pressed = True
                     if keystate == "14":  # release
-                        debug("Ctrl released")
+                        debug("Shift released")
                         if first_pressed and second_pressed:
                             send_signal_to_emacs()
                         first_pressed = False
                 elif detailmatch.group(1) in second_keys:
                     if keystate == "13":  # press
-                        debug("Shift pressed")
+                        debug("Ctrl/Alt pressed")
                         second_pressed = True
                     if keystate == "14":  # release
-                        debug("Shift released")
+                        debug("Ctrl/Alt released")
                         if first_pressed and second_pressed:
                             send_signal_to_emacs()
                         second_pressed = False
